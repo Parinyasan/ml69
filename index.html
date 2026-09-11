@@ -2,37 +2,85 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <title>ML Class Company Dashboard</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>ML Class - Company Leaderboard</title>
     <style>
-        body { font-family: sans-serif; padding: 2rem; }
-        .company-card { border: 1px solid #ccc; padding: 1rem; margin-bottom: 1rem; border-radius: 8px;}
+        body { font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; background-color: #f6f8fa; padding: 2rem; color: #24292f; }
+        .container { max-width: 900px; margin: 0 auto; background: white; padding: 2rem; border-radius: 8px; box-shadow: 0 4px 6px rgba(0,0,0,0.1); }
+        h1 { text-align: center; color: #0969da; }
+        table { width: 100%; border-collapse: collapse; margin-top: 1.5rem; }
+        th, td { padding: 12px; text-align: left; border-bottom: 1px solid #d0d7de; }
+        th { background-color: #f6f8fa; font-weight: 600; }
+        .avatar { width: 40px; height: 40px; border-radius: 50%; vertical-align: middle; margin-right: 10px; }
+        .rank { font-weight: bold; color: #57606a; text-align: center; }
+        .badge { background-color: #0969da; color: white; padding: 4px 8px; border-radius: 12px; font-size: 0.85em; }
     </style>
 </head>
 <body>
-    <h1>🚀 ML69 Company Dashboard</h1>
-    <div id="dashboard">Loading data...</div>
+    <div class="container">
+        <h1>🏆 ML69 Class Contribution Leaderboard</h1>
+        <div id="loading" style="text-align:center;">กำลังโหลดข้อมูล...</div>
+        
+        <table id="leaderboard-table" style="display: none;">
+            <thead>
+                <tr>
+                    <th style="width: 50px; text-align: center;">Rank</th>
+                    <th>Member</th>
+                    <th>Company</th>
+                    <th>Commits</th>
+                </tr>
+            </thead>
+            <tbody id="leaderboard-body">
+                <!-- ข้อมูลจะถูกแทรกตรงนี้ -->
+            </tbody>
+        </table>
+    </div>
 
     <script>
-        // ดึงไฟล์ JSON ที่ถูกสร้างจาก Python 
         fetch('data.json')
             .then(response => response.json())
             .then(data => {
-                const container = document.getElementById('dashboard');
-                container.innerHTML = ''; // Clear loading text
+                let allMembers = [];
                 
-                // วนลูปวาดการ์ดแสดงผลของแต่ละบริษัท
-                for (const [company, stats] of Object.entries(data)) {
-                    const card = document.createElement('div');
-                    card.className = 'company-card';
-                    card.innerHTML = `
-                        <h2>${company}</h2>
-                        <p>Repositories: ${stats.total_repos}</p>
-                    `;
-                    container.appendChild(card);
+                // 1. นำข้อมูลทุกคนจากทุกบริษัทมารวมกันไว้ใน Array เดียว
+                for (const orgName in data) {
+                    allMembers = allMembers.concat(data[orgName]);
                 }
+                
+                // 2. เรียงลำดับจากจำนวน Commit มากไปน้อย
+                allMembers.sort((a, b) => b.commits - a.commits);
+
+                // 3. วาดลงตาราง
+                const tbody = document.getElementById('leaderboard-body');
+                
+                allMembers.forEach((member, index) => {
+                    const row = document.createElement('tr');
+                    
+                    // ทำเครื่องหมาย 🥇 🥈 🥉 ให้ Top 3
+                    let rankDisplay = index + 1;
+                    if (rankDisplay === 1) rankDisplay = '🥇';
+                    else if (rankDisplay === 2) rankDisplay = '🥈';
+                    else if (rankDisplay === 3) rankDisplay = '🥉';
+
+                    row.innerHTML = `
+                        <td class="rank">${rankDisplay}</td>
+                        <td>
+                            <img src="${member.avatar}" class="avatar" alt="avatar">
+                            <a href="https://github.com/${member.username}" target="_blank" style="text-decoration: none; color: #24292f; font-weight: bold;">
+                                ${member.username}
+                            </a>
+                        </td>
+                        <td><span class="badge">${member.company}</span></td>
+                        <td style="font-weight: bold; color: #2da44e;">${member.commits}</td>
+                    `;
+                    tbody.appendChild(row);
+                });
+
+                document.getElementById('loading').style.display = 'none';
+                document.getElementById('leaderboard-table').style.display = 'table';
             })
             .catch(error => {
-                document.getElementById('dashboard').innerHTML = "Error loading data.";
+                document.getElementById('loading').innerHTML = "❌ ไม่สามารถโหลดข้อมูลได้ หรือยังไม่มีข้อมูล (รอ Actions รันเสร็จ)";
             });
     </script>
 </body>
