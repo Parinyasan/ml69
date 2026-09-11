@@ -3,84 +3,133 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>ML Class - Company Leaderboard</title>
+    <title>ML Class - Company Leaderboards</title>
     <style>
-        body { font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; background-color: #f6f8fa; padding: 2rem; color: #24292f; }
-        .container { max-width: 900px; margin: 0 auto; background: white; padding: 2rem; border-radius: 8px; box-shadow: 0 4px 6px rgba(0,0,0,0.1); }
-        h1 { text-align: center; color: #0969da; }
-        table { width: 100%; border-collapse: collapse; margin-top: 1.5rem; }
-        th, td { padding: 12px; text-align: left; border-bottom: 1px solid #d0d7de; }
-        th { background-color: #f6f8fa; font-weight: 600; }
-        .avatar { width: 40px; height: 40px; border-radius: 50%; vertical-align: middle; margin-right: 10px; }
-        .rank { font-weight: bold; color: #57606a; text-align: center; }
-        .badge { background-color: #0969da; color: white; padding: 4px 8px; border-radius: 12px; font-size: 0.85em; }
+        body { 
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; 
+            background-color: #f6f8fa; 
+            padding: 2rem; 
+            color: #24292f; 
+        }
+        .header-title { 
+            text-align: center; 
+            color: #0969da; 
+            margin-bottom: 2rem;
+        }
+        
+        /* จัด Layout ให้ Card เรียงกันสวยๆ */
+        .companies-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
+            gap: 1.5rem;
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        /* ตกแต่ง Card ของแต่ละบริษัท */
+        .company-card {
+            background: white;
+            padding: 1.5rem;
+            border-radius: 12px;
+            box-shadow: 0 4px 6px rgba(0,0,0,0.05);
+            border-top: 5px solid #0969da;
+        }
+        .company-title {
+            margin-top: 0;
+            color: #24292f;
+            border-bottom: 2px solid #f0f3f6;
+            padding-bottom: 10px;
+            font-size: 1.25rem;
+            text-align: center;
+        }
+
+        /* ตกแต่งตารางด้านใน Card */
+        .member-table { width: 100%; border-collapse: collapse; margin-top: 10px; }
+        .member-table th, .member-table td { padding: 10px; text-align: left; border-bottom: 1px solid #eaeef2; }
+        .member-table th { color: #57606a; font-size: 0.9em; background-color: #f6f8fa; }
+        
+        .avatar { width: 32px; height: 32px; border-radius: 50%; vertical-align: middle; margin-right: 10px; }
+        .rank { font-weight: bold; color: #57606a; text-align: center; width: 40px; }
+        .commits { font-weight: bold; color: #2da44e; text-align: center; }
     </style>
 </head>
 <body>
-    <div class="container">
-        <h1>🏆 ML69 Class Contribution Leaderboard</h1>
-        <div id="loading" style="text-align:center;">กำลังโหลดข้อมูล...</div>
-        
-        <table id="leaderboard-table" style="display: none;">
-            <thead>
-                <tr>
-                    <th style="width: 50px; text-align: center;">Rank</th>
-                    <th>Member</th>
-                    <th>Company</th>
-                    <th>Commits</th>
-                </tr>
-            </thead>
-            <tbody id="leaderboard-body">
-                <!-- ข้อมูลจะถูกแทรกตรงนี้ -->
-            </tbody>
-        </table>
-    </div>
+    <h1 class="header-title">🏆 ML Class - Company Contribution</h1>
+    
+    <div id="loading" style="text-align:center;">กำลังโหลดข้อมูล...</div>
+    
+    <!-- กล่องหลักที่จะเอา Card บริษัทมาใส่ -->
+    <div id="companies-container" class="companies-grid"></div>
 
     <script>
         fetch('data.json')
             .then(response => response.json())
             .then(data => {
-                let allMembers = [];
-                
-                // 1. นำข้อมูลทุกคนจากทุกบริษัทมารวมกันไว้ใน Array เดียว
-                for (const orgName in data) {
-                    allMembers = allMembers.concat(data[orgName]);
-                }
-                
-                // 2. เรียงลำดับจากจำนวน Commit มากไปน้อย
-                allMembers.sort((a, b) => b.commits - a.commits);
-
-                // 3. วาดลงตาราง
-                const tbody = document.getElementById('leaderboard-body');
-                
-                allMembers.forEach((member, index) => {
-                    const row = document.createElement('tr');
-                    
-                    // ทำเครื่องหมาย 🥇 🥈 🥉 ให้ Top 3
-                    let rankDisplay = index + 1;
-                    if (rankDisplay === 1) rankDisplay = '🥇';
-                    else if (rankDisplay === 2) rankDisplay = '🥈';
-                    else if (rankDisplay === 3) rankDisplay = '🥉';
-
-                    row.innerHTML = `
-                        <td class="rank">${rankDisplay}</td>
-                        <td>
-                            <img src="${member.avatar}" class="avatar" alt="avatar">
-                            <a href="https://github.com/${member.username}" target="_blank" style="text-decoration: none; color: #24292f; font-weight: bold;">
-                                ${member.username}
-                            </a>
-                        </td>
-                        <td><span class="badge">${member.company}</span></td>
-                        <td style="font-weight: bold; color: #2da44e;">${member.commits}</td>
-                    `;
-                    tbody.appendChild(row);
-                });
-
+                const container = document.getElementById('companies-container');
                 document.getElementById('loading').style.display = 'none';
-                document.getElementById('leaderboard-table').style.display = 'table';
+
+                // วนลูปตามรายชื่อบริษัทใน data.json
+                for (const [companyName, members] of Object.entries(data)) {
+                    
+                    // 1. เรียงลำดับสมาชิกในบริษัทจาก Commit มากไปน้อย
+                    members.sort((a, b) => b.commits - a.commits);
+
+                    // 2. สร้าง Card สำหรับบริษัทนี้
+                    const card = document.createElement('div');
+                    card.className = 'company-card';
+                    
+                    // 3. ใส่ชื่อบริษัท
+                    const title = document.createElement('h2');
+                    title.className = 'company-title';
+                    title.innerText = `🏢 ${companyName}`;
+                    card.appendChild(title);
+
+                    // 4. สร้างตาราง
+                    const table = document.createElement('table');
+                    table.className = 'member-table';
+                    table.innerHTML = `
+                        <thead>
+                            <tr>
+                                <th style="text-align: center;">Rank</th>
+                                <th>Member</th>
+                                <th style="text-align: center;">Commits</th>
+                            </tr>
+                        </thead>
+                        <tbody></tbody>
+                    `;
+                    const tbody = table.querySelector('tbody');
+
+                    // 5. วนลูปใส่รายชื่อสมาชิกที่เรียงคะแนนแล้ว
+                    members.forEach((member, index) => {
+                        const tr = document.createElement('tr');
+                        
+                        let rankDisplay = index + 1;
+                        if (rankDisplay === 1) rankDisplay = '🥇';
+                        else if (rankDisplay === 2) rankDisplay = '🥈';
+                        else if (rankDisplay === 3) rankDisplay = '🥉';
+
+                        tr.innerHTML = `
+                            <td class="rank">${rankDisplay}</td>
+                            <td>
+                                <img src="${member.avatar}" class="avatar" alt="avatar">
+                                <a href="https://github.com/${member.username}" target="_blank" style="text-decoration: none; color: #24292f; font-weight: 500;">
+                                    ${member.username}
+                                </a>
+                            </td>
+                            <td class="commits">${member.commits}</td>
+                        `;
+                        tbody.appendChild(tr);
+                    });
+
+                    // นำตารางใส่เข้าไปใน Card
+                    card.appendChild(table);
+                    
+                    // นำ Card ใส่เข้าไปในหน้าเว็บ
+                    container.appendChild(card);
+                }
             })
             .catch(error => {
-                document.getElementById('loading').innerHTML = "❌ ไม่สามารถโหลดข้อมูลได้ หรือยังไม่มีข้อมูล (รอ Actions รันเสร็จ)";
+                document.getElementById('loading').innerHTML = "❌ ไม่สามารถโหลดข้อมูลได้ หรือยังไม่มีข้อมูล";
             });
     </script>
 </body>
