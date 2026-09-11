@@ -6,7 +6,7 @@ token = os.environ.get("GH_TOKEN")
 g = Github(token)
 
 # ⚠️ อาจารย์อย่าลืมเปลี่ยนชื่อ Org ให้ตรงกับของนักศึกษาจริงนะครับ
-target_orgs = ["company-a-org", "company-b-org"] 
+target_orgs = ["tensorflow", "pytorch"] 
 
 dashboard_data = {}
 
