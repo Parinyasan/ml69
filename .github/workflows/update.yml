@@ -2,24 +2,22 @@ name: Update Dashboard Data
 
 on:
   schedule:
-    # รันทุกๆ 1 ชั่วโมง (ปรับเวลาได้ตาม Cron syntax)
     - cron: '0 * * * *'
-  workflow_dispatch: # เปิดให้กดรัน Manual ได้ด้วย
+  workflow_dispatch: 
 
 jobs:
   build:
     runs-on: ubuntu-latest
     
-    # ให้สิทธิ์ Action ในการ Push โค้ดกลับลง Repo
     permissions:
       contents: write
 
     steps:
     - name: Checkout Repository
-      uses: actions/checkout@v3
+      uses: actions/checkout@v4 # <-- อัปเดตเป็น v4 แล้ว
 
     - name: Set up Python
-      uses: actions/setup-python@v4
+      uses: actions/setup-python@v5 # <-- อัปเดตเป็น v5 แล้ว
       with:
         python-version: '3.10'
 
@@ -35,6 +33,6 @@ jobs:
       run: |
         git config --local user.email "action@github.com"
         git config --local user.name "GitHub Action"
-        git add data.json
+        git add data.json || echo "No data.json to add"
         git commit -m "Auto-update company data" || echo "No changes to commit"
         git push
