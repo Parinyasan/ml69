@@ -17,16 +17,14 @@
             margin-bottom: 2rem;
         }
         
-        /* จัด Layout ให้ Card เรียงกันสวยๆ */
         .companies-grid {
             display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
+            grid-template-columns: repeat(auto-fit, minmax(450px, 1fr)); /* ปรับให้ Card กว้างขึ้นเพื่อรับคอลัมน์ใหม่ */
             gap: 1.5rem;
-            max-width: 1200px;
+            max-width: 1400px;
             margin: 0 auto;
         }
 
-        /* ตกแต่ง Card ของแต่ละบริษัท */
         .company-card {
             background: white;
             padding: 1.5rem;
@@ -43,22 +41,30 @@
             text-align: center;
         }
 
-        /* ตกแต่งตารางด้านใน Card */
         .member-table { width: 100%; border-collapse: collapse; margin-top: 10px; }
-        .member-table th, .member-table td { padding: 10px; text-align: left; border-bottom: 1px solid #eaeef2; }
-        .member-table th { color: #57606a; font-size: 0.9em; background-color: #f6f8fa; }
+        .member-table th, .member-table td { padding: 10px; text-align: center; border-bottom: 1px solid #eaeef2; }
+        /* จัดให้คอลัมน์ Member ชิดซ้าย */
+        .member-table th:nth-child(2), .member-table td:nth-child(2) { text-align: left; }
+        
+        .member-table th { color: #57606a; font-size: 0.85em; background-color: #f6f8fa; }
         
         .avatar { width: 32px; height: 32px; border-radius: 50%; vertical-align: middle; margin-right: 10px; }
-        .rank { font-weight: bold; color: #57606a; text-align: center; width: 40px; }
-        .commits { font-weight: bold; color: #2da44e; text-align: center; }
+        .rank { font-weight: bold; color: #57606a; width: 40px; }
+        
+        /* ใส่สีให้แยกประเภทชัดเจน */
+        .val-commits { color: #57606a; font-size: 0.9em; }
+        .val-issues { color: #8250df; font-size: 0.9em; } /* สีม่วงของ GitHub Issue */
+        .val-prs { color: #2da44e; font-size: 0.9em; } /* สีเขียวของ GitHub PR */
+        .val-total { font-weight: bold; color: #0969da; font-size: 1.1em; } /* สีฟ้าเด่นๆ สำหรับยอดรวม */
+        
+        .empty-state { text-align: center; color: #8c959f; padding: 20px; font-style: italic; }
     </style>
 </head>
 <body>
-    <h1 class="header-title">🏆 ML Class - Company Contribution</h1>
+    <h1 class="header-title">🏆 ML Class - Contribution Leaderboard</h1>
     
     <div id="loading" style="text-align:center;">กำลังโหลดข้อมูล...</div>
     
-    <!-- กล่องหลักที่จะเอา Card บริษัทมาใส่ -->
     <div id="companies-container" class="companies-grid"></div>
 
     <script>
@@ -68,38 +74,46 @@
                 const container = document.getElementById('companies-container');
                 document.getElementById('loading').style.display = 'none';
 
-                // วนลูปตามรายชื่อบริษัทใน data.json
                 for (const [companyName, members] of Object.entries(data)) {
                     
-                    // 1. เรียงลำดับสมาชิกในบริษัทจาก Commit มากไปน้อย
-                    members.sort((a, b) => b.commits - a.commits);
+                    // 1. เรียงลำดับจาก Total Contribution มากไปน้อย
+                    members.sort((a, b) => b.total_contribution - a.total_contribution);
 
-                    // 2. สร้าง Card สำหรับบริษัทนี้
                     const card = document.createElement('div');
                     card.className = 'company-card';
                     
-                    // 3. ใส่ชื่อบริษัท
                     const title = document.createElement('h2');
                     title.className = 'company-title';
                     title.innerText = `🏢 ${companyName}`;
                     card.appendChild(title);
 
-                    // 4. สร้างตาราง
+                    // ถ้าบริษัทยังไม่มีคนทำอะไรเลย
+                    if (members.length === 0) {
+                        const emptyMsg = document.createElement('div');
+                        emptyMsg.className = 'empty-state';
+                        emptyMsg.innerText = "ยังไม่มีข้อมูล Contribution ในบริษัทนี้";
+                        card.appendChild(emptyMsg);
+                        container.appendChild(card);
+                        continue;
+                    }
+
                     const table = document.createElement('table');
                     table.className = 'member-table';
                     table.innerHTML = `
                         <thead>
                             <tr>
-                                <th style="text-align: center;">Rank</th>
+                                <th>Rank</th>
                                 <th>Member</th>
-                                <th style="text-align: center;">Commits</th>
+                                <th title="Commits">💻 CM</th>
+                                <th title="Issues">🎯 IS</th>
+                                <th title="Pull Requests">🔄 PR</th>
+                                <th>Total</th>
                             </tr>
                         </thead>
                         <tbody></tbody>
                     `;
                     const tbody = table.querySelector('tbody');
 
-                    // 5. วนลูปใส่รายชื่อสมาชิกที่เรียงคะแนนแล้ว
                     members.forEach((member, index) => {
                         const tr = document.createElement('tr');
                         
@@ -116,15 +130,15 @@
                                     ${member.username}
                                 </a>
                             </td>
-                            <td class="commits">${member.commits}</td>
+                            <td class="val-commits">${member.commits}</td>
+                            <td class="val-issues">${member.issues}</td>
+                            <td class="val-prs">${member.prs}</td>
+                            <td class="val-total">${member.total_contribution}</td>
                         `;
                         tbody.appendChild(tr);
                     });
 
-                    // นำตารางใส่เข้าไปใน Card
                     card.appendChild(table);
-                    
-                    // นำ Card ใส่เข้าไปในหน้าเว็บ
                     container.appendChild(card);
                 }
             })
