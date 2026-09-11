@@ -19,9 +19,9 @@
         
         .companies-grid {
             display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(450px, 1fr)); /* ปรับให้ Card กว้างขึ้นเพื่อรับคอลัมน์ใหม่ */
+            grid-template-columns: repeat(auto-fit, minmax(350px, 1fr)); /* ปรับ Card ให้แคบลงได้ เพราะคอลัมน์น้อยลง */
             gap: 1.5rem;
-            max-width: 1400px;
+            max-width: 1200px;
             margin: 0 auto;
         }
 
@@ -42,20 +42,17 @@
         }
 
         .member-table { width: 100%; border-collapse: collapse; margin-top: 10px; }
-        .member-table th, .member-table td { padding: 10px; text-align: center; border-bottom: 1px solid #eaeef2; }
-        /* จัดให้คอลัมน์ Member ชิดซ้าย */
-        .member-table th:nth-child(2), .member-table td:nth-child(2) { text-align: left; }
+        .member-table th, .member-table td { padding: 10px; text-align: left; border-bottom: 1px solid #eaeef2; }
+        .member-table th { color: #57606a; font-size: 0.9em; background-color: #f6f8fa; }
         
-        .member-table th { color: #57606a; font-size: 0.85em; background-color: #f6f8fa; }
+        /* จัดให้คอลัมน์ Contribute อยู่ตรงกลาง */
+        .member-table th:nth-child(3), .member-table td:nth-child(3) { text-align: center; }
         
         .avatar { width: 32px; height: 32px; border-radius: 50%; vertical-align: middle; margin-right: 10px; }
-        .rank { font-weight: bold; color: #57606a; width: 40px; }
+        .rank { font-weight: bold; color: #57606a; text-align: center; width: 40px; }
         
-        /* ใส่สีให้แยกประเภทชัดเจน */
-        .val-commits { color: #57606a; font-size: 0.9em; }
-        .val-issues { color: #8250df; font-size: 0.9em; } /* สีม่วงของ GitHub Issue */
-        .val-prs { color: #2da44e; font-size: 0.9em; } /* สีเขียวของ GitHub PR */
-        .val-total { font-weight: bold; color: #0969da; font-size: 1.1em; } /* สีฟ้าเด่นๆ สำหรับยอดรวม */
+        /* สไตล์สำหรับคอลัมน์ Contribute */
+        .val-contribute { font-weight: bold; color: #0969da; font-size: 1.1em; }
         
         .empty-state { text-align: center; color: #8c959f; padding: 20px; font-style: italic; }
     </style>
@@ -76,7 +73,7 @@
 
                 for (const [companyName, members] of Object.entries(data)) {
                     
-                    // 1. เรียงลำดับจาก Total Contribution มากไปน้อย
+                    // เรียงลำดับจาก Total Contribution มากไปน้อยเหมือนเดิม
                     members.sort((a, b) => b.total_contribution - a.total_contribution);
 
                     const card = document.createElement('div');
@@ -87,7 +84,6 @@
                     title.innerText = `🏢 ${companyName}`;
                     card.appendChild(title);
 
-                    // ถ้าบริษัทยังไม่มีคนทำอะไรเลย
                     if (members.length === 0) {
                         const emptyMsg = document.createElement('div');
                         emptyMsg.className = 'empty-state';
@@ -102,12 +98,9 @@
                     table.innerHTML = `
                         <thead>
                             <tr>
-                                <th>Rank</th>
+                                <th style="text-align: center;">Rank</th>
                                 <th>Member</th>
-                                <th title="Commits">💻 CM</th>
-                                <th title="Issues">🎯 IS</th>
-                                <th title="Pull Requests">🔄 PR</th>
-                                <th>Total</th>
+                                <th title="รวมจาก Commits, Issues และ Pull Requests">Contribute</th>
                             </tr>
                         </thead>
                         <tbody></tbody>
@@ -130,10 +123,8 @@
                                     ${member.username}
                                 </a>
                             </td>
-                            <td class="val-commits">${member.commits}</td>
-                            <td class="val-issues">${member.issues}</td>
-                            <td class="val-prs">${member.prs}</td>
-                            <td class="val-total">${member.total_contribution}</td>
+                            <!-- ใช้ค่า total_contribution มาโชว์ในคอลัมน์นี้ -->
+                            <td class="val-contribute">${member.total_contribution}</td>
                         `;
                         tbody.appendChild(tr);
                     });
