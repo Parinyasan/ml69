@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>ML Class Company Dashboard</title>
+    <style>
+        body { font-family: sans-serif; padding: 2rem; }
+        .company-card { border: 1px solid #ccc; padding: 1rem; margin-bottom: 1rem; border-radius: 8px;}
+    </style>
+</head>
+<body>
+    <h1>🚀 ML Company Dashboard</h1>
+    <div id="dashboard">Loading data...</div>
+
+    <script>
+        // ดึงไฟล์ JSON ที่ถูกสร้างจาก Python 
+        fetch('data.json')
+            .then(response => response.json())
+            .then(data => {
+                const container = document.getElementById('dashboard');
+                container.innerHTML = ''; // Clear loading text
+                
+                // วนลูปวาดการ์ดแสดงผลของแต่ละบริษัท
+                for (const [company, stats] of Object.entries(data)) {
+                    const card = document.createElement('div');
+                    card.className = 'company-card';
+                    card.innerHTML = `
+                        <h2>${company}</h2>
+                        <p>Repositories: ${stats.total_repos}</p>
+                    `;
+                    container.appendChild(card);
+                }
+            })
+            .catch(error => {
+                document.getElementById('dashboard').innerHTML = "Error loading data.";
+            });
+    </script>
+</body>
+</html>
