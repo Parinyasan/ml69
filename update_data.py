@@ -10,7 +10,7 @@ auth = Auth.Token(token)
 g = Github(auth=auth)
 
 # ⚠️ อาจารย์อย่าลืมเปลี่ยนชื่อ Org ด้านล่างให้ตรงกับของนักศึกษาจริงนะครับ
-target_orgs = ["company-a-org", "company-b-org"] 
+target_orgs = ["finoria-co", "ideamee", "vantage-consortium-co-ltd"] 
 
 dashboard_data = {}
 
