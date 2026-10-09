@@ -95,10 +95,10 @@
         {
             "username": "RemZx-2809",
             "avatar": "https://avatars.githubusercontent.com/u/216672192?v=4",
-            "commits": 1,
+            "commits": 6,
             "issues": 0,
-            "prs": 2,
-            "total_contribution": 3
+            "prs": 3,
+            "total_contribution": 9
         }
     ],
     "curveqz": [
@@ -249,22 +249,46 @@
         {
             "username": "Chokunn",
             "avatar": "https://avatars.githubusercontent.com/u/233382543?v=4",
-            "commits": 5,
+            "commits": 11,
             "issues": 0,
             "prs": 0,
-            "total_contribution": 5
+            "total_contribution": 11
         },
         {
             "username": "chnkcn97",
             "avatar": "https://avatars.githubusercontent.com/u/225046256?v=4",
-            "commits": 3,
+            "commits": 4,
             "issues": 0,
             "prs": 0,
-            "total_contribution": 3
+            "total_contribution": 4
         },
         {
             "username": "martsai",
             "avatar": "https://avatars.githubusercontent.com/u/44117387?v=4",
+            "commits": 2,
+            "issues": 0,
+            "prs": 0,
+            "total_contribution": 2
+        },
+        {
+            "username": "Draco-afk",
+            "avatar": "https://avatars.githubusercontent.com/u/196110439?v=4",
+            "commits": 15,
+            "issues": 0,
+            "prs": 0,
+            "total_contribution": 15
+        },
+        {
+            "username": "Ostudio007",
+            "avatar": "https://avatars.githubusercontent.com/u/197658943?v=4",
+            "commits": 4,
+            "issues": 0,
+            "prs": 0,
+            "total_contribution": 4
+        },
+        {
+            "username": "armza8053-alt",
+            "avatar": "https://avatars.githubusercontent.com/u/227363719?v=4",
             "commits": 2,
             "issues": 0,
             "prs": 0,
@@ -275,18 +299,18 @@
         {
             "username": "SurasekPha",
             "avatar": "https://avatars.githubusercontent.com/u/233019899?v=4",
-            "commits": 11,
+            "commits": 13,
             "issues": 0,
             "prs": 2,
-            "total_contribution": 13
+            "total_contribution": 15
         },
         {
             "username": "ChirasakS",
             "avatar": "https://avatars.githubusercontent.com/u/216672216?v=4",
-            "commits": 7,
+            "commits": 8,
             "issues": 0,
             "prs": 1,
-            "total_contribution": 8
+            "total_contribution": 9
         },
         {
             "username": "Chirasak12",
