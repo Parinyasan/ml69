@@ -199,10 +199,10 @@
         {
             "username": "Kanawatkha",
             "avatar": "https://avatars.githubusercontent.com/u/223379881?v=4",
-            "commits": 19,
+            "commits": 20,
             "issues": 0,
             "prs": 0,
-            "total_contribution": 19
+            "total_contribution": 20
         },
         {
             "username": "Nisaranun",
@@ -263,20 +263,12 @@
             "total_contribution": 4
         },
         {
-            "username": "martsai",
-            "avatar": "https://avatars.githubusercontent.com/u/44117387?v=4",
-            "commits": 2,
-            "issues": 0,
-            "prs": 0,
-            "total_contribution": 2
-        },
-        {
             "username": "Draco-afk",
             "avatar": "https://avatars.githubusercontent.com/u/196110439?v=4",
-            "commits": 15,
+            "commits": 16,
             "issues": 0,
             "prs": 0,
-            "total_contribution": 15
+            "total_contribution": 16
         },
         {
             "username": "Ostudio007",
@@ -289,6 +281,14 @@
         {
             "username": "armza8053-alt",
             "avatar": "https://avatars.githubusercontent.com/u/227363719?v=4",
+            "commits": 2,
+            "issues": 0,
+            "prs": 0,
+            "total_contribution": 2
+        },
+        {
+            "username": "martsai",
+            "avatar": "https://avatars.githubusercontent.com/u/44117387?v=4",
             "commits": 2,
             "issues": 0,
             "prs": 0,
