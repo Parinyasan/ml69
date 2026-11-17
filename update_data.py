@@ -9,7 +9,7 @@ g = Github(auth=auth)
 
 # ⚠️ อย่าลืมเปลี่ยนชื่อ Org ให้ตรงกับของนักศึกษาจริงนะครับ
 target_orgs = ["craftify-hq", "finoria-co", "forge-solutions-lab", "curveqz", "money-trade", 
-               "vantage-consortium-co-ltd", "ideamee", "nowl-solutions", "zuplexes"] 
+               "vantage-consortium-co-ltd", "ideamee", "nowl-solutions", "zuplexes", "name-thinking", "zensevix"] 
 
 dashboard_data = {}
 
