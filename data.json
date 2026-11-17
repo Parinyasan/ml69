@@ -69,10 +69,10 @@
         {
             "username": "T-Patima",
             "avatar": "https://avatars.githubusercontent.com/u/224441166?v=4",
-            "commits": 27,
+            "commits": 36,
             "issues": 1,
             "prs": 4,
-            "total_contribution": 32
+            "total_contribution": 41
         },
         {
             "username": "rujirat-s",
@@ -129,10 +129,10 @@
         {
             "username": "AnutTonkla",
             "avatar": "https://avatars.githubusercontent.com/u/219864485?v=4",
-            "commits": 34,
+            "commits": 41,
             "issues": 0,
             "prs": 0,
-            "total_contribution": 34
+            "total_contribution": 41
         },
         {
             "username": "SanuchaSondech",
@@ -287,10 +287,10 @@
         {
             "username": "Kanawatkha",
             "avatar": "https://avatars.githubusercontent.com/u/223379881?v=4",
-            "commits": 24,
+            "commits": 25,
             "issues": 0,
             "prs": 0,
-            "total_contribution": 24
+            "total_contribution": 25
         },
         {
             "username": "Nisaranun",
@@ -406,6 +406,82 @@
             "commits": 6,
             "issues": 0,
             "prs": 0,
+            "total_contribution": 6
+        }
+    ],
+    "name-thinking": [
+        {
+            "username": "FrankLawrenceMercado05",
+            "avatar": "https://avatars.githubusercontent.com/u/282446307?v=4",
+            "commits": 4,
+            "issues": 0,
+            "prs": 0,
+            "total_contribution": 4
+        },
+        {
+            "username": "0801911027Do",
+            "avatar": "https://avatars.githubusercontent.com/u/217764183?v=4",
+            "commits": 12,
+            "issues": 1,
+            "prs": 12,
+            "total_contribution": 25
+        },
+        {
+            "username": "aigentic-solution",
+            "avatar": "https://avatars.githubusercontent.com/u/158045024?v=4",
+            "commits": 3,
+            "issues": 0,
+            "prs": 0,
+            "total_contribution": 3
+        },
+        {
+            "username": "Supachok",
+            "avatar": "https://avatars.githubusercontent.com/u/2376956?v=4",
+            "commits": 1,
+            "issues": 0,
+            "prs": 0,
+            "total_contribution": 1
+        }
+    ],
+    "zensevix": [
+        {
+            "username": "Supakon33",
+            "avatar": "https://avatars.githubusercontent.com/u/231996817?v=4",
+            "commits": 15,
+            "issues": 0,
+            "prs": 0,
+            "total_contribution": 15
+        },
+        {
+            "username": "ken30242",
+            "avatar": "https://avatars.githubusercontent.com/u/223843504?v=4",
+            "commits": 8,
+            "issues": 0,
+            "prs": 0,
+            "total_contribution": 8
+        },
+        {
+            "username": "monikyvitorial-lang",
+            "avatar": "https://avatars.githubusercontent.com/u/264864647?v=4",
+            "commits": 1,
+            "issues": 0,
+            "prs": 0,
+            "total_contribution": 1
+        },
+        {
+            "username": "supakon",
+            "avatar": "https://avatars.githubusercontent.com/u/5010763?v=4",
+            "commits": 1,
+            "issues": 0,
+            "prs": 0,
+            "total_contribution": 1
+        },
+        {
+            "username": "jai2255999-beep",
+            "avatar": "https://avatars.githubusercontent.com/u/231190550?v=4",
+            "commits": 5,
+            "issues": 0,
+            "prs": 1,
             "total_contribution": 6
         }
     ]
