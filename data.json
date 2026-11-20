@@ -367,20 +367,20 @@
             "total_contribution": 10
         },
         {
-            "username": "Draco-afk",
-            "avatar": "https://avatars.githubusercontent.com/u/196110439?v=4",
-            "commits": 19,
-            "issues": 0,
-            "prs": 1,
-            "total_contribution": 20
-        },
-        {
             "username": "Ostudio007",
             "avatar": "https://avatars.githubusercontent.com/u/197658943?v=4",
-            "commits": 4,
+            "commits": 15,
             "issues": 0,
             "prs": 0,
-            "total_contribution": 4
+            "total_contribution": 15
+        },
+        {
+            "username": "Draco-afk",
+            "avatar": "https://avatars.githubusercontent.com/u/196110439?v=4",
+            "commits": 30,
+            "issues": 2,
+            "prs": 3,
+            "total_contribution": 35
         },
         {
             "username": "armza8053-alt",
