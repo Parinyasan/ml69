@@ -403,26 +403,26 @@
         {
             "username": "SurasekPha",
             "avatar": "https://avatars.githubusercontent.com/u/233019899?v=4",
-            "commits": 28,
+            "commits": 33,
             "issues": 0,
             "prs": 9,
-            "total_contribution": 37
+            "total_contribution": 42
         },
         {
             "username": "ChirasakS",
             "avatar": "https://avatars.githubusercontent.com/u/216672216?v=4",
-            "commits": 20,
+            "commits": 26,
             "issues": 0,
             "prs": 5,
-            "total_contribution": 25
+            "total_contribution": 31
         },
         {
             "username": "Chirasak12",
             "avatar": "https://avatars.githubusercontent.com/u/285609619?v=4",
-            "commits": 6,
+            "commits": 10,
             "issues": 0,
             "prs": 0,
-            "total_contribution": 6
+            "total_contribution": 10
         },
         {
             "username": "Athichanon",
@@ -431,6 +431,14 @@
             "issues": 0,
             "prs": 1,
             "total_contribution": 4
+        },
+        {
+            "username": "KritsanaSukhaworn026",
+            "avatar": "https://avatars.githubusercontent.com/u/218358702?v=4",
+            "commits": 14,
+            "issues": 0,
+            "prs": 0,
+            "total_contribution": 14
         }
     ],
     "name-thinking": [
@@ -471,10 +479,10 @@
         {
             "username": "Supakon33",
             "avatar": "https://avatars.githubusercontent.com/u/231996817?v=4",
-            "commits": 8,
+            "commits": 12,
             "issues": 0,
             "prs": 0,
-            "total_contribution": 8
+            "total_contribution": 12
         },
         {
             "username": "ken30242",
@@ -495,10 +503,10 @@
         {
             "username": "Estio168",
             "avatar": "https://avatars.githubusercontent.com/u/233320353?v=4",
-            "commits": 7,
+            "commits": 8,
             "issues": 0,
             "prs": 0,
-            "total_contribution": 7
+            "total_contribution": 8
         },
         {
             "username": "monikyvitorial-lang",
@@ -523,6 +531,14 @@
             "issues": 0,
             "prs": 1,
             "total_contribution": 6
+        },
+        {
+            "username": "NonSxoc",
+            "avatar": "https://avatars.githubusercontent.com/u/233134002?v=4",
+            "commits": 5,
+            "issues": 0,
+            "prs": 2,
+            "total_contribution": 7
         }
     ]
 }
